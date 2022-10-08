@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../media/logocv.png" />
+    <link href="../assets/css/discord.css" rel="stylesheet" /> 
+    <link href="../assets/css/prism.css" rel="stylesheet" /> 
+    <title>Document</title>
+</head>
+<body>
+<header >    
+
+    
+
+    <a href="https://discord.com/"><img src="../media/discord logo.png" alt="logo discord"></a>
+    <a  class="" href="../index.html#Projet"><div class="home"> <h1>CV</h1></div></a>
+
+</header>
+    <pre class="discord">
+        <h1 class="titre">Bot discord</h1>
+    <code class="language-python  ">
+        LANGAGE : Python
+       
+
+        from random import *
+        import discord 
+        from discord.ext import commands
+        from discord.ext.commands import Bot
+        client=discord.Client()
+        #from PIL import Image
+        from io import BytesIO
+        
+        bot = commands.Bot("!")
+        #permet de savoir si le bot est bien lancé:
+        @bot.event
+        async def on_ready():
+            print("Le bot est pret")
+        
+        
+        class ecrit:
+            def __init__(self,ctx,channel):
+                self.sds=channel.send
+        
+        
+        
+        
+        #permet de choisir une place aléatoirement
+        @bot.command(name='place')
+        async def message_on(ctx):
+            print(str(ctx.author.display_name) + " !place")
+        
+            #Entrer le nom des joueur dans l'invite:
+        
+            j1=input("enter le joueure 1 :")
+            j2 = input("enter le joueure 2 :")
+            j3 = input("enter le joueure 3 :")
+            j4 = input("enter le joueure 4 :")
+            j5=input("enter le joueure 5 :")
+        
+            #création de la liste des place (leaugue of legende):
+        
+            list_place=['top','adc','jungle','support','mid']
+        
+            #mise des place aléatoire au joueur entré :
+        
+            jj1=choice(list_place)
+            list_place.remove(jj1)
+            jj2 = choice(list_place)
+            list_place.remove(jj2)
+            jj3 = choice(list_place)
+            list_place.remove(jj3)
+            jj4= choice(list_place)
+            list_place.remove(jj4)
+            jj5 = choice(list_place)
+            list_place.remove(jj5)
+        
+        
+            #message du bot sur le channel ou la commande à été rentré :
+            f=" : "
+            await ctx.sds(j1 + f + jj1)
+            await ctx.channel.send(j2 + f + jj2)
+            await ctx.channel.send(j3 + f + jj3)
+            await ctx.channel.send(j4 + f + jj4)
+            await ctx.channel.send(j5 + f + jj5)
+            
+        
+        
+        
+        
+        
+        
+        #commande de supréssion des message :
+        @bot.command(name='del')
+        async def delete(ctx, number_of_message:int):
+        
+            message = await ctx.channel.history(limit=number_of_message + 1).flatten()
+            print(str(ctx.author.display_name + " !Del "+str(number_of_message)))
+        
+            for each_message in message:
+                await each_message.delete()
+        
+        
+        
+        #Pierre feuille ciseau :
+        @bot.command(name='pfc')
+        async def on_message(ctx):
+            print(str(ctx.author.display_name)+" !pfc")
+        
+            liste = ['Pierre', 'Feuille', 'Ciseaux']
+            choix = choice(liste)
+        
+            await ctx.channel.send(choix+" De "+str(ctx.author.display_name))
+        
+        #Mot dans une phrase = a une action
+        @bot.event
+        async def on_message(ctx,):
+            black_liste=['nathan','Nathan','paul est nul']
+            cyril_liste = ['cyril', 'Cyril']
+            message_content = ctx.content.strip().lower()
+            message = ctx.channel.history
+        
+            for i in cyril_liste:
+                if i in message_content:
+                   await ctx.channel.send(file=discord.File('cyril tryharde.jpg'))
+        
+        
+            message_content = ctx.content.strip().lower()
+            for i in black_liste:
+                if i in message_content:
+                    await ctx.channel.send(f"Attention {ctx.author.display_name} pute")
+                    await ctx.delete()
+        
+            await bot.process_commands(ctx)
+        
+        
+        
+        
+        
+        
+        
+        bot.run("********************************************************")
+        
+    </code>
+</pre>
+        <script src="../assets/js/prism.js"></script> 
+</body>
+</html>

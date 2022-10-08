@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="./media/logocv.png" />
+    <link rel="stylesheet" href="../../assets/css/bootstrap.css" />
+    <link rel="stylesheet" href="../../assets/css/sourceJeu.css">
+    <link rel="stylesheet" href="../../assets/css/prism.css">
+    <title>Document</title>
+</head>
+<body>
+   <div>
+          <ul  class="flex_div" id="nav_bar">
+            <li class="nav-item">
+              <a href="maine .html" class="nav-link ">Main</a>
+            </li>
+            <li class="nav-item">
+
+              <a href="Game.html" class="nav-link ">Game</a>
+            </li>
+            <li class="nav-item">
+                    <a href="Comet.html" class="nav-link">Comet</a>
+                
+            <li class="nav-item">
+              <a href="comet_event.html" class="nav-link">commet_event</a>
+            </li>
+
+                  
+            
+
+              <li class="nav-item">
+                <a href="Joueur.html" class="nav-link">Joueur</a>
+              </li>
+              
+              <li class="nav-item">
+                <a href="Monster.html" class="nav-link active">Monster</a>
+              </li>
+
+                
+              <li class="nav-item">
+                <a href="Projectil.html" class="nav-link">Projectil</a>
+              </li>
+              
+              <li class="nav-item">
+                <a href="song.html" class="nav-link">Song</a>
+              </li>
+
+              <li class="nav-item ">
+                <a href="../../index.html#Projet" class="nav-link active">CV</a>
+              </li>
+
+
+          </ul>
+        </div>
+
+        <pre class="block_code">
+        <code class="language-python  ">
+language : python
+
+import pygame
+import random
+
+class Monster(pygame.sprite.Sprite):
+    def __init__(self,game):
+        super().__init__()
+        self.image=pygame.image.load("dossier_du_jeu/image/méchant.png")
+        self.pv=random.randint(10,80)
+        self.game=game
+        self.max_pv=self.pv
+        self.attaque= 1
+        self.rect=self.image.get_rect()
+        self.rect.x=2000
+        self.rect.y=800
+        self.vitesse=random.randint(5*2,10*2)
+
+    def remove(self):
+        self.game.all_monster.remove(self)
+        self.game.score+=10
+
+    def left_remove(self):
+        self.game.all_monster2.remove(self)
+        self.game.score += 10
+
+    def damage(self,montant):
+        self.pv -= montant
+        if self.pv <=0:
+            self.remove()
+            if not  self.game.comet_event.is_full_loaded():
+                self.game.spawn_monster()
+
+            else:
+                self.game.comet_event.attempt_fall()
+
+    def damage_Left(self,montant):
+        self.pv -= montant
+        if self.pv <=0:
+            self.left_remove()
+
+            if not  self.game.comet_event.is_full_loaded():
+                self.game.spawn_left_monster()
+
+            else:
+                self.game.comet_event.attempt_fall()
+
+
+
+
+
+    def left_foward(self):
+        if not pygame.sprite.spritecollideany(self, self.game.all_player):
+            self.rect.x += self.vitesse
+        for player in self.game.all_player:
+            if pygame.sprite.spritecollideany(self, self.game.all_player):
+                player.damage(self.attaque)
+
+    def foward(self):
+        if not  pygame.sprite.spritecollideany(self, self.game.all_player):
+            self.rect.x -= self.vitesse
+        for player in self.game.all_player:
+            if pygame.sprite.spritecollideany(self, self.game.all_player):
+                player.damage(self.attaque)
+
+
+
+
+    def update_health_bar(self,surface):
+
+        color=(6,66,255)
+        bar_rect=[self.rect.x+40,self.rect.y-20,self.pv,5]
+        back_color=(30,30,30)
+        back_bar_rect = [self.rect.x + 40, self.rect.y - 20, self.max_pv, 5]
+        pygame.draw.rect(surface, back_color, back_bar_rect)
+        pygame.draw.rect(surface,color,bar_rect)
+
+
+"""""
+
+        if self.rect.x > 1250 and self.rect.y == 800:
+           self.rect.x-=self.vitesse
+        elif  self.rect.x == 1250 and self.rect.y > 500:
+            self.rect.y -= self.vitesse
+        elif self.rect.x < 1500 and self.rect.y == 500:
+            self.rect.x += self.vitesse
+        elif self.rect.x == 1500 and self.rect.y < 800:
+            self.rect.y += self.vitesse
+            
+            
+        def update_mouvement(self):
+            global COUNTER, TIMER, DELAIS  ## Pour modifier Variables
+            ## Prend le tick à chaque itération de la boucle.
+            now = pygame.time.get_ticks()
+
+            ## Compare le tick de TIMER, avec celui de maintenant
+            ## Si le temps entre les deux est plus grand ou égal
+            ## à notre délais,
+            if now - TIMER >= DELAIS:
+                ## on change l'ancien TIMER, avec le nouveau.
+                TIMER = now
+
+                ## Si DELAIS est 250.. on incrémente le y
+                if DELAIS == 1:
+                    self.rect.y -= self.vitesse
+                elif DELAIS == 2:  ## Sinon, on décrémente le y.
+                    self.rect.x -= self.vitesse
+                elif DELAIS == 3:
+                    self.rect.y += self.vitesse
+                elif DELAIS == 4:
+                    self.rect.x += self.vitesse
+                ## Compter le nombre de fois il a bouger (maximum 25)
+                COUNTER += 1
+
+            ## S'il a atteint 25,
+            if COUNTER >= 25:
+                ## On modifie la valeur de DELAIS (Inverse)
+                if DELAIS == 1:
+                    DELAIS = 2
+                elif DELAIS == 2:
+                    DELAIS = 3
+                elif DELAIS == 3:
+                    DELAIS = 4
+                elif DELAIS == 4:
+                    DELAIS = 2
+
+                COUNTER = 0
+                """
+
+        </code>
+    </pre>
+    <script src="../../assets/js/prism.js"></script> 
+    <script src="../../assets/js/jeusource.js"></script> 
+
+</body>
+</html>

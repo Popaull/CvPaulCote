@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="./media/logocv.png" />
+    <link rel="stylesheet" href="../../assets/css/bootstrap.css" />
+    <link rel="stylesheet" href="../../assets/css/sourceJeu.css">
+    <link rel="stylesheet" href="../../assets/css/prism.css">
+    <title>Document</title>
+</head>
+<body>
+   <div>
+          <ul  class="flex_div" id="nav_bar">
+            <li class="nav-item">
+              <a href="maine .html" class="nav-link ">Main</a>
+            </li>
+            <li class="nav-item">
+
+              <a href="Game.html" class="nav-link ">Game</a>
+            </li>
+            <li class="nav-item">
+                    <a href="Comet.html" class="nav-link">Comet</a>
+                
+            <li class="nav-item">
+              <a href="comet_event.html" class="nav-link">commet_event</a>
+            </li>
+
+                  
+            
+
+              <li class="nav-item">
+                <a href="Joueur.html" class="nav-link">Joueur</a>
+              </li>
+              
+              <li class="nav-item">
+                <a href="Monster.html" class="nav-link">Monster</a>
+              </li>
+
+                
+              <li class="nav-item">
+                <a href="Projectil.html" class="nav-link">Projectil</a>
+              </li>
+              
+              <li class="nav-item">
+                <a href="song.html" class="nav-link active">Song</a>
+              </li>
+
+              <li class="nav-item ">
+                <a href="../../index.html#Projet" class="nav-link active">CV</a>
+              </li>
+
+
+          </ul>
+        </div>
+
+        <pre class="block_code">
+        <code class="language-python  ">
+language : python
+
+import pygame
+
+class Song :
+    def __init__(self):
+        self.sonds={
+            'wao':pygame.mixer.Sound("dossier_du_jeu/music/kc-wao.mp3")
+
+        }
+
+    def play(self,name):
+        self.sonds[name].play()
+
+    def stop(self, name):
+        self.sonds[name].stop()
+        </code>
+    </pre>
+    <script src="../../assets/js/prism.js"></script> 
+    <script src="../../assets/js/jeusource.js"></script> 
+
+</body>
+</html>

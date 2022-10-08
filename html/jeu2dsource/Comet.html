@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="./media/logocv.png" />
+    <link rel="stylesheet" href="../../assets/css/bootstrap.css" />
+    <link rel="stylesheet" href="../../assets/css/sourceJeu.css">
+    <link rel="stylesheet" href="../../assets/css/prism.css">
+    <title>Document</title>
+</head>
+<body>
+   <div>
+          <ul  class="flex_div" id="nav_bar">
+            <li class="nav-item">
+              <a href="maine .html" class="nav-link ">Main</a>
+            </li>
+            <li class="nav-item">
+
+              <a href="Game.html" class="nav-link ">Game</a>
+            </li>
+            <li class="nav-item">
+                    <a href="Comet.html" class="nav-link active">Comet</a>
+                
+            <li class="nav-item">
+              <a href="comet_event.html" class="nav-link">commet_event</a>
+            </li>
+
+                  
+            
+
+              <li class="nav-item">
+                <a href="Joueur.html" class="nav-link">Joueur</a>
+              </li>
+              
+              <li class="nav-item">
+                <a href="Monster.html" class="nav-link">Monster</a>
+              </li>
+
+                
+              <li class="nav-item">
+                <a href="Projectil.html" class="nav-link">Projectil</a>
+              </li>
+              
+              <li class="nav-item">
+                <a href="song.html" class="nav-link">Song</a>
+              </li>
+
+              <li class="nav-item ">
+                <a href="../../index.html#Projet" class="nav-link active">CV</a>
+              </li>
+
+
+          </ul>
+        </div>
+
+        <pre class="block_code">
+        <code class="language-python  ">
+language : python
+
+import pygame
+import random
+
+class comet(pygame.sprite.Sprite):
+    def __init__(self,event_comet):
+        super().__init__()
+        self.event_comet=event_comet
+        self.image=pygame.image.load("dossier_du_jeu/image/kenny.png")
+        self.image=pygame.transform.scale(self.image,(150,150))
+        self.rect=self.image.get_rect()
+        self.vitesse=random.randint(5*2,8*2 )
+        self.rect.x=random.randint(0,1920)
+        self.rect.y=-random.randint(0,800)
+        self.damage=20
+
+
+    def remove(self):
+        self.event_comet.all_comet.remove(self)
+
+        if len(self.event_comet.all_comet) == 0:
+            self.event_comet.reset_event()
+            self.event_comet.game.spawn_monster()
+            self.event_comet.game.spawn_left_monster()
+    def fall(self):
+        self.rect.y += self.vitesse
+        if self.rect.y>=900:
+            self.remove()
+            if len(self.event_comet.all_comet)==0:
+                self.event_comet.reset_event()
+                self.event_comet.fall_mode=False
+
+        if pygame.sprite.spritecollideany(self,self.event_comet.game.all_player):
+            self.event_comet.game.player.damage(self.damage)
+            self.remove()
+
+        </code>
+    </pre>
+    <script src="../../assets/js/prism.js"></script> 
+    <script src="../../assets/js/jeusource.js"></script> 
+
+</body>
+</html>

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="./media/logocv.png" />
+    <link rel="stylesheet" href="../../assets/css/bootstrap.css" />
+    <link rel="stylesheet" href="../../assets/css/sourceJeu.css">
+    <link rel="stylesheet" href="../../assets/css/prism.css">
+    <title>Document</title>
+</head>
+<body>
+   <div>
+          <ul  class="flex_div" id="nav_bar">
+            <li class="nav-item">
+              <a href="maine .html" class="nav-link ">Main</a>
+            </li>
+            <li class="nav-item">
+
+              <a href="Game.html" class="nav-link ">Game</a>
+            </li>
+            <li class="nav-item">
+                    <a href="Comet.html" class="nav-link">Comet</a>
+                
+            <li class="nav-item">
+              <a href="comet_event.html" class="nav-link">commet_event</a>
+            </li>
+
+                  
+            
+
+              <li class="nav-item">
+                <a href="Joueur.html" class="nav-link">Joueur</a>
+              </li>
+              
+              <li class="nav-item">
+                <a href="Monster.html" class="nav-link">Monster</a>
+              </li>
+
+                
+              <li class="nav-item">
+                <a href="Projectil.html" class="nav-link active">Projectil</a>
+              </li>
+              
+              <li class="nav-item">
+                <a href="song.html" class="nav-link">Song</a>
+              </li>
+
+              <li class="nav-item ">
+                <a href="../../index.html#Projet" class="nav-link active">CV</a>
+              </li>
+
+
+          </ul>
+        </div>
+
+        <pre class="block_code">
+        <code class="language-python  ">
+language : python
+
+import pygame
+
+class projectil(pygame.sprite.Sprite):
+    def __init__(self,player):
+        super().__init__()
+        self.vitess = 10*2
+        self.image=pygame.image.load("dossier_du_jeu/image/épée_project.png")
+        self. rect=self.image.get_rect()
+        self.player=player
+        self.rect.x=player.rect.x
+        self.rect.y = player.rect.y+140
+
+    def remove(self):
+        self.player.all_projectiles.remove(self)
+    def left_remove(self):
+        self.player.all_projectiles2.remove(self)
+
+    def move_right(self):
+        self.rect.x += self.vitess
+        for monster in self.player.game.all_monster:
+            if  pygame.sprite.spritecollideany(self, self.player.game.all_monster):
+                 monster.damage(self.player.attack)
+                 self.remove()
+            if pygame.sprite.spritecollideany(self, self.player.game.comet_event.all_comet):
+                 self.player.pv+=20
+                 self.remove()
+                 self.left_remove()
+        if self.rect.x > 1920:
+            self.remove()
+
+
+    def move_left(self):
+        self.image=self.image=pygame.image.load("dossier_du_jeu/image/épée_project_retourné.png")
+        self.rect.x -= self.vitess
+        for monster in self.player.game.all_monster2:
+            if pygame.sprite.spritecollideany(self, self.player.game.all_monster2):
+                monster.damage_Left(self.player.attack)
+                self.left_remove()
+            if pygame.sprite.spritecollideany(self, self.player.game.comet_event.all_comet):
+                 self.player.game.all_player.pv+=5
+        if self.rect.x <-50:
+            self.left_remove()
+        </code>
+    </pre>
+    <script src="../../assets/js/prism.js"></script> 
+    <script src="../../assets/js/jeusource.js"></script> 
+
+</body>
+</html>

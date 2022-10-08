@@ -1,0 +1,90 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+
+body{
+    background-color: rgb(157, 157, 241);
+}
+
+a{
+    all: unset;
+    cursor: pointer;
+    
+    
+}
+
+img{
+    position: relative;
+    left: 100px;
+    top: 10px;
+    width : 100px;
+    transform: rotate(-10deg);
+    height : 100px;
+}
+
+img:hover{
+    transition: 0.5s;
+    transform: rotate(350deg);
+}
+
+.home{
+    width: 20vw;
+    position: relative;
+    bottom: 50px;
+    margin-left: auto;
+    margin-right: auto;
+    align-items: center;
+    text-align: center;
+    background-color: rgb(247, 247, 247);
+    border-radius: 10px;
+    border: 3px solid rgb(51, 50, 50);
+    height: 50px;
+   
+    color: #2D2D2D;
+
+}
+.home h1{
+    padding-top:2.5%;
+    font-family:Arial, Helvetica, sans-serif;
+    
+    
+}
+.home:hover{
+    color: rgb(247,247,247);
+    background-color: #2D2D2D;
+    transition: 0.5s;
+}
+
+.discord{
+    border-radius: 60px;
+    margin: 60px !important;
+    margin-top: 0px !important;
+    box-shadow: -1px -1px 20px white;
+    
+}
+.titre{
+    text-align: center;
+}
+
+@media screen and (max-width:480px) {
+    code[class*=language-], pre[class*=language-] {
+        font-size: 0.1em !important;
+    }
+    
+.discord{
+    border-radius: 60px;
+    margin: 10px !important;
+    margin-top: 0px !important;
+    box-shadow: -1px -1px 20px white;
+    
+}
+img{
+    position: relative;
+    left: 10px;
+    top: 10px;
+    width : 100px;
+    transform: rotate(-10deg);
+    height : 100px;
+}
+}

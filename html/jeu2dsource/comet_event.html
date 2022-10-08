@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="./media/logocv.png" />
+    <link rel="stylesheet" href="../../assets/css/bootstrap.css" />
+    <link rel="stylesheet" href="../../assets/css/sourceJeu.css">
+    <link rel="stylesheet" href="../../assets/css/prism.css">
+    <title>Document</title>
+</head>
+<body>
+   <div>
+          <ul  class="flex_div" id="nav_bar">
+            <li class="nav-item">
+              <a href="maine .html" class="nav-link ">Main</a>
+            </li>
+            <li class="nav-item">
+
+              <a href="Game.html" class="nav-link ">Game</a>
+            </li>
+            <li class="nav-item">
+                    <a href="Comet.html" class="nav-link">Comet</a>
+                
+            <li class="nav-item">
+              <a href="comet_event.html" class="nav-link active">commet_event</a>
+            </li>
+
+                  
+            
+
+              <li class="nav-item">
+                <a href="Joueur.html" class="nav-link">Joueur</a>
+              </li>
+              
+              <li class="nav-item">
+                <a href="Monster.html" class="nav-link">Monster</a>
+              </li>
+
+                
+              <li class="nav-item">
+                <a href="Projectil.html" class="nav-link">Projectil</a>
+              </li>
+              
+              <li class="nav-item">
+                <a href="song.html" class="nav-link">Song</a>
+              </li>
+
+              <li class="nav-item ">
+                <a href="../../index.html#Projet" class="nav-link active">CV</a>
+              </li>
+
+
+          </ul>
+        </div>
+
+        <pre class="block_code">
+        <code class="language-python  ">
+language : python
+
+import pygame
+from comet import comet
+
+class CometFallEvent :
+    def __init__(self,game):
+        self.game=game
+        self.percent=0
+        self.percent_speed=10
+        self.all_comet=pygame.sprite.Group()
+        self.fall_mode =False
+
+
+    def add_percent(self):
+        self.percent += self.percent_speed/100
+
+    def is_full_loaded(self):
+        return  self.percent >= 100
+
+    def meteor_fall(self):
+        self.game.score+=30
+        for i in range(1,10):
+            self.all_comet.add(comet(self))
+
+
+    def reset_event(self):
+        self.percent=0
+    def attempt_fall(self):
+        if self.is_full_loaded() and len(self.game.all_monster) == 0:
+
+            self.meteor_fall()
+            self.fall_mode=True
+            print("pluit de kenny")
+
+
+    def updat_bar(self,surface):
+        self.add_percent()
+
+
+        pygame.draw.rect(surface, (0,0,0),[0,surface.get_height()-1070,surface.get_width(),10] )
+        pygame.draw.rect(surface, (255, 10, 10), [0, surface.get_height()-1070, (surface.get_width()/100)*self.percent, 10])
+
+        </code>
+    </pre>
+    <script src="../../assets/js/prism.js"></script> 
+    <script src="../../assets/js/jeusource.js"></script> 
+
+</body>
+</html>

@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="./media/logocv.png" />
+    <link rel="stylesheet" href="../../assets/css/bootstrap.css" />
+    <link rel="stylesheet" href="../../assets/css/sourceJeu.css">
+    <link rel="stylesheet" href="../../assets/css/prism.css">
+    <title>Document</title>
+</head>
+<body>
+   <div>
+          <ul  class="flex_div" id="nav_bar">
+            <li class="nav-item">
+              <a href="maine .html" class="nav-link ">Main</a>
+            </li>
+            <li class="nav-item">
+
+              <a href="Game.html" class="nav-link active ">Game</a>
+            </li>
+            <li class="nav-item">
+                    <a href="Comet.html" class="nav-link">Comet</a>
+                
+            <li class="nav-item">
+              <a href="comet_event.html" class="nav-link">commet_event</a>
+            </li>
+
+                  
+            
+
+              <li class="nav-item">
+                <a href="Joueur.html" class="nav-link">Joueur</a>
+              </li>
+              
+              <li class="nav-item">
+                <a href="Monster.html" class="nav-link">Monster</a>
+              </li>
+
+                
+              <li class="nav-item">
+                <a href="Projectil.html" class="nav-link">Projectil</a>
+              </li>
+              
+              <li class="nav-item">
+                <a href="song.html" class="nav-link">Song</a>
+              </li>
+
+              <li class="nav-item ">
+                <a href="../../index.html#Projet" class="nav-link active">CV</a>
+              </li>
+
+
+          </ul>
+        </div>
+
+        <pre class="block_code">
+        <code class="language-python  ">
+language : python
+
+from  commet_event import CometFallEvent
+from Joueur import Player
+from monster import Monster
+from song import Song
+import pygame
+background = pygame.image.load('dossier_du_jeu/image/background.png')
+class Game:
+
+    def __init__(self):
+
+        self.is_playing=False
+        self.score = 0
+        self.player= Player(self)
+        self.all_player=pygame.sprite.Group()
+        self.add_player=self.all_player.add(self.player)
+        self.all_monster=pygame.sprite.Group()
+        self.all_monster2=pygame.sprite.Group()
+        self.pressed ={}
+        self.comet_event=CometFallEvent(self)
+        self.monster=Monster(self)
+        self.valide_sword=1
+        self.song=Song()
+        self.back_x=self.player.vitesse
+
+    def spawn_left_monster(self):
+        monster=Monster(self)
+        monster.image = pygame.image.load("dossier_du_jeu/image/méchant_tourné.png")
+        monster.rect.x=-500
+        self.all_monster2.add(monster)
+    def start(self):
+        self.score = 0
+        #self.song.play("wao")
+        self.is_playing=True
+        self.spawn_monster()
+        self.spawn_left_monster()
+
+    def game_over(self):
+        self.song.stop("wao")
+        self.is_playing=False
+        self.all_monster=pygame.sprite.Group()
+        self.all_monster2 = pygame.sprite.Group()
+        self.comet_event.all_comet=pygame.sprite.Group()
+        self.player.pv=100
+        self.player.rect.x=1080/2
+
+    def spawn_monster(self):
+        monster=Monster(self)
+
+        self.all_monster.add(monster)
+
+
+
+    def update(self,screnne):
+        if self.is_playing == True:
+            screnne.blit(background,( self.back_x,0))
+            self.comet_event.updat_bar(screnne)
+            self.all_monster.draw(screnne)
+            self.all_monster2.draw(screnne)
+            self.player.all_projectiles.draw(screnne)
+            self.player.all_projectiles2.draw(screnne)
+            self.comet_event.all_comet.draw(screnne)
+            screnne.blit(self.player.image1_perso, self.player.rect)
+            
+            font = pygame.font.SysFont("Arial Black",20)
+            score_texte= font.render(f"SCRORE : {self.score}" ,1 ,(255,255,255))
+            screnne.blit(score_texte,(20,20))
+
+
+
+
+            for player in self.all_player:
+                player.update_health_bar(screnne)
+
+            for left_monster1 in self.all_monster2:
+                left_monster1.update_health_bar(screnne)
+                left_monster1.left_foward()
+
+
+            for monster1 in self.all_monster:
+                monster1.update_health_bar(screnne)
+                monster1.foward()
+
+            for projectil in self.player.all_projectiles:
+                projectil.move_right()
+
+            for projectil2 in self.player.all_projectiles2:
+                projectil2.move_left()
+
+            for comet in self.comet_event.all_comet:
+                comet.fall()
+            
+            if self.pressed.get(pygame.K_d) and self.player.rect.x + self.player.rect.width < screnne.get_width():
+                self.player.image1_perso = pygame.image.load("dossier_du_jeu/image/Chevalier.png")
+                self.player.move_right()
+              #  if self.back_x<1000:
+               #     self.back_x -= self.player.vitesse
+                self.valide_sword = 1
+                    
+            
+            elif self.pressed.get(pygame.K_z) :
+                    self.player.move_up()
+
+            
+            elif self.pressed.get(pygame.K_s) :
+                 self.player.move_down()
+        
+
+            elif self.pressed.get(pygame.K_q) and self.player.rect.x > -200:
+                 #  if self.back_x<0:
+                #      self.back_x+=self.player.vitesse
+                      #print("pute")
+                   self.player.image1_perso = pygame.image.load("dossier_du_jeu/image/Chevalier_tourné.png")
+                   self.player.move_left()
+                   self.valide_sword = 0
+
+        </code>
+    </pre>
+    <script src="../../assets/js/prism.js"></script> 
+    <script src="../../assets/js/jeusource.js"></script> 
+
+</body>
+</html>

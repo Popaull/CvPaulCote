@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../media/logocv.png" />
+    <link href="../assets/css/discord.css" rel="stylesheet" /> 
+    <link href="../assets/css/prism.css" rel="stylesheet" /> 
+    <title>Document</title>
+</head>
+<style> 
+body{
+background-color:rgb(136, 238, 191); 
+}
+img{
+    transform: rotate(0);
+}
+img:hover{
+    transform: rotate(360deg);
+}
+</style>
+
+<body >
+<header >    
+
+    
+
+    <a href="https://opencv.org/"><img src="../media/logoopencv.png" alt="logo opencv"></a>
+    <a  class="" href="../index.html#Projet"><div class="home"> <h1>CV</h1></div></a>
+
+</header>
+    <pre class="discord">
+        <h1 class="titre">Flux Hdmi</h1>
+    <code class="language-cpp  ">
+        #include <opencv2/opencv.hpp>
+        #include <iostream>
+        
+        using namespace cv;
+        using namespace std;
+        
+        int main(int argc, char* argv[])
+        {
+            //Ouvre le flux au port 0 (à changer si plusieur connécté)
+            VideoCapture cap(0);
+        
+            // si ce connecte pas shutdown
+            if (cap.isOpened() == false)
+            {
+                cout << "Cannot open the video file" << endl;
+                cin.get(); 
+                return -1;
+            }
+        
+        
+            // choisi les fps
+            double fps = cap.get(CAP_PROP_FPS);
+            cout << "Frames per seconds : " << fps << endl;
+        
+        
+            //met la windows
+            String window_name = "Popaul Flux";
+            namedWindow(window_name, WINDOW_NORMAL);
+            setWindowProperty("Popaul Flux", WND_PROP_FULLSCREEN, WINDOW_FULLSCREEN);
+        
+            //choisi le dimention du flux et les fps (1920 / 1080)
+            cap.set(CAP_PROP_FRAME_WIDTH, 1920);
+            cap.set(CAP_PROP_FRAME_HEIGHT, 1080);
+            cap.set(CAP_PROP_FPS, 60);
+            
+        
+            while (true)
+            {
+                Mat frame;
+                bool bSuccess = cap.read(frame); // lie les nouvelle image de la video 
+        
+                //coupe la video si c'est la fin (si debrancher)
+                if (bSuccess == false)
+                {
+                    cout << "cable debrancher ??" << endl;
+                    break;
+                }
+        
+            
+                imshow(window_name, frame);
+        
+                // si Esc est pressé ferme l'appli 
+                if (waitKey(10) == 27)
+                {
+                    cout << "fermeture de l'app (echape pressé)" << endl;
+                    break;
+                }
+            }
+        
+            return 0;
+        
+        }
+        
+    </code>
+</pre>
+        <script src="../assets/js/prism.js"></script> 
+</body>
+</html>

@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="./media/logocv.png" />
+    <link rel="stylesheet" href="../../assets/css/bootstrap.css" />
+    <link rel="stylesheet" href="../../assets/css/sourceJeu.css">
+    <link rel="stylesheet" href="../../assets/css/prism.css">
+    <title>Document</title>
+</head>
+<body>
+   <div>
+          <ul  class="flex_div" id="nav_bar">
+            <li class="nav-item">
+              <a href="maine .html" class="nav-link active">Main</a>
+            </li>
+            <li class="nav-item">
+
+              <a href="Game.html" class="nav-link ">Game</a>
+            </li>
+            <li class="nav-item">
+                    <a href="Comet.html" class="nav-link">Comet</a>
+                
+            <li class="nav-item">
+              <a href="comet_event.html" class="nav-link">commet_event</a>
+            </li>
+
+                  
+            
+
+              <li class="nav-item">
+                <a href="Joueur.html" class="nav-link">Joueur</a>
+              </li>
+              
+              <li class="nav-item">
+                <a href="Monster.html" class="nav-link">Monster</a>
+              </li>
+
+                
+              <li class="nav-item">
+                <a href="Projectil.html" class="nav-link">Projectil</a>
+              </li>
+              
+              <li class="nav-item">
+                <a href="song.html" class="nav-link">Song</a>
+              </li>
+
+              <li class="nav-item ">
+                <a href="../../index.html#Projet" class="nav-link active">CV</a>
+              </li>
+
+
+          </ul>
+        </div>
+
+        <pre class="block_code">
+        <code class="language-python  ">
+language : python
+
+import pygame
+from game import Game
+from Joueur import Player
+
+
+pygame.init()
+
+clock=pygame.time.Clock()
+FPS = 60
+valid_sword=1
+  
+running = True
+background = pygame.image.load('dossier_du_jeu/image/background.png')
+banner=pygame.image.load("dossier_du_jeu/image/prèsentation !.jpg")
+banner=pygame.transform.scale(banner,(1920,1080))
+
+play=pygame.image.load("dossier_du_jeu/image/play.png")
+play=pygame.transform.scale(play,(100,100))
+play_rect=play.get_rect()
+play_rect.x=920
+play_rect.y=1080/2
+
+
+
+#fenetre
+pygame.display.set_caption("Jeu paul")
+screnne=pygame.display.set_mode((1920,1080))
+
+game = Game()
+player = Player(game)
+
+
+
+while running:
+  
+    
+    
+    if game.is_playing:
+        game.update(screnne)
+
+    
+    else:
+
+        screnne.blit(banner,(0,0))
+        screnne.blit(play, (play_rect.x, play_rect.y))
+        font = pygame.font.SysFont("Arial Black", 20)
+
+        score_texte = font.render(f"SCRORE : {game.score}", 1, (255, 255, 255))
+        screnne.blit(score_texte, (1920 / 2-50, 0))
+
+        
+
+    pygame.display.flip()
+
+
+
+    for event in pygame.event.get():
+
+
+        if event.type == pygame.QUIT:
+            running= False
+            print("ferrmeture du jeu")
+            pygame.quit()
+        elif event.type == pygame.KEYDOWN:
+            game.pressed[event.key] = True
+            if event.key == pygame.K_SPACE:
+                if game.valide_sword == 1:
+                    game.player.lunch_project()
+                elif game.valide_sword == 0:
+                    game.player.lunch_project2()
+            if event.key == pygame.K_F1:
+                game.game_over()
+            if event.key == pygame.K_ESCAPE:
+                running=False 
+
+
+        elif event.type == pygame.KEYUP:
+            game.pressed[event.key] = False
+
+        elif event.type== pygame.MOUSEBUTTONDOWN:
+            if play_rect.collidepoint(event.pos) :
+                game.start()
+
+    clock.tick(FPS)
+
+
+
+
+pygame.quit()
+        </code>
+    </pre>
+    <script src="../../assets/js/prism.js"></script> 
+    <script src="../../assets/js/jeusource.js"></script> 
+
+</body>
+</html>

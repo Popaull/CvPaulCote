@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="./media/logocv.png" />
+    <link rel="stylesheet" href="../../assets/css/bootstrap.css" />
+    <link rel="stylesheet" href="../../assets/css/sourceJeu.css">
+    <link rel="stylesheet" href="../../assets/css/prism.css">
+    <title>Document</title>
+</head>
+<body>
+   <div>
+          <ul  class="flex_div" id="nav_bar">
+            <li class="nav-item">
+              <a href="maine .html" class="nav-link ">Main</a>
+            </li>
+            <li class="nav-item">
+
+              <a href="Game.html" class="nav-link ">Game</a>
+            </li>
+            <li class="nav-item">
+                    <a href="Comet.html" class="nav-link">Comet</a>
+                
+            <li class="nav-item">
+              <a href="comet_event.html" class="nav-link">commet_event</a>
+            </li>
+
+                  
+            
+
+              <li class="nav-item">
+                <a href="Joueur.html" class="nav-link active">Joueur</a>
+              </li>
+              
+              <li class="nav-item">
+                <a href="Monster.html" class="nav-link">Monster</a>
+              </li>
+
+                
+              <li class="nav-item">
+                <a href="Projectil.html" class="nav-link">Projectil</a>
+              </li>
+              
+              <li class="nav-item">
+                <a href="song.html" class="nav-link">Song</a>
+              </li>
+
+              <li class="nav-item ">
+                <a href="../../index.html#Projet" class="nav-link active">CV</a>
+              </li>
+
+
+          </ul>
+        </div>
+
+        <pre class="block_code">
+        <code class="language-python  ">
+language : python
+
+import pygame
+
+from Projectil1 import projectil
+
+
+
+background = pygame.image.load('dossier_du_jeu/image/background.png')
+image1_perso = "dossier_du_jeu/image/Chevalier.png"
+image2_perso = "dossier_du_jeu/image/Chevalier.png"
+
+
+class Player(pygame.sprite.Sprite):
+    def __init__(self, game):
+        super().__init__()
+        self.game= game
+        self.pv=100
+        self.max_pv= 100
+        self.attack=34
+        self.vitesse = 15
+        self.all_projectiles = pygame.sprite.Group()
+        self.all_projectiles2 = pygame.sprite.Group()
+        self.image1_perso=pygame.image.load("dossier_du_jeu/image/Chevalier.png")
+        self.rect = self.image1_perso.get_rect()
+        self.valide_image=0
+        self.rect.x=800
+        self.rect.y=800
+        self.vit_jump=1
+
+
+    def secrenne(self ,screnne, x , y):
+        screnne.blit(background,(x,y))
+  
+    def jump(self):
+        if self.rect.y  > 700:
+            self.rect.y -=self.vit_jump
+        elif self.rect.y <800:
+            self.rect.y += self.vit_jump
+
+
+    def damage(self, montant):
+        self.pv -= montant
+        if self.pv <= 0:
+            self.game.game_over()
+
+
+    def update_health_bar(self, surface):
+
+        color = (255, 6, 66)
+        bar_rect = [self.rect.x + 40, self.rect.y - 20, self.pv, 5]
+        back_color = (30, 30, 30)
+        back_bar_rect = [self.rect.x + 40, self.rect.y - 20, self.max_pv, 5]
+        pygame.draw.rect(surface, back_color, back_bar_rect)
+        pygame.draw.rect(surface, color, bar_rect)
+
+    def lunch_project(self):
+        self.all_projectiles.add(projectil(self))
+
+
+
+    def lunch_project2(self):
+        self.all_projectiles2.add(projectil(self))
+
+
+
+
+    def move_up(self):
+         if not pygame.sprite.spritecollideany(self, self.game.all_monster):
+
+            self.rect.y -= self.vitesse
+    
+    def move_down(self):
+         if not pygame.sprite.spritecollideany(self, self.game.all_monster):
+
+            self.rect.y += self.vitesse
+    
+    def move_right(self):
+        if not pygame.sprite.spritecollideany(self, self.game.all_monster):
+
+            self.rect.x -= self.vitesse
+
+    def move_left(self):
+        if not pygame.sprite.spritecollideany(self, self.game.all_monster2):
+            self.rect.x += self.vitesse
+
+        </code>
+    </pre>
+    <script src="../../assets/js/prism.js"></script> 
+    <script src="../../assets/js/jeusource.js"></script> 
+
+</body>
+</html>
