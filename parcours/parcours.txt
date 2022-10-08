@@ -1,0 +1,32 @@
+En pleine periode de confinement après avoir fais un peut de powerschell je deside d'apprendre le pyhton . 
+j'ai donc suivi un tuto sur internet qui ma apris tout les base de la progration (variable , boucle , liste , fonction , class ... )
+
+Après passer une dizaine d'heure je me mis donc à faire mon premier projet  : un jeu en 2D j'ai donc suivis un tuto 
+sur l'apprentissage de la librairis <a> Pygame </a> c'est donc après une 15 d'heure que je m'aitrisais plutot bien 
+la librairis j'ai donc réaliser une petit qui m'a permit d'apprendre et de faire ce que jaimais 
+
+une fois avoir vue la puissance de python et de c'est librairy j'ai donc vue qu'il étais possible de crée un bot discorde 
+étant un utilisateur de la platforme je me suis donc dit que je pouvais crèe un bot capable d'ajouter de nouvelle 
+foncionnaliter comme un systeme de pierre feuille ciseau je me suis donc mis à coder ce bote avec <a>discord.py</a>
+
+
+Python c'est bien mais pas performent les 3/4 des jeux son fait avec un langage pour moi encore inconu le c++ . 
+Je me suis donc dit que avec les base que j'ai en python le c++ ne devais etre pas plus complique (si) 
+ça tombe je venais de trouver un nouveau projet avoir une appli cappable d'afficher de flux vidéo 
+envoier depuis un adateur hdmi vers usb . les seuls appli trouver n'avais sois une mauvais qualiter 
+sois une trop grosse latence . Je relalise alors ce projet en c++ . aucune interface simple et qui marche . 
+
+Un ami me parlai d'un projet avec le lycée pour participer à un concours pour un vols 0g nous devion donc
+réaliser une capture de donner dans un tube rempli d'eau pour voir comment reagis la pression dans ce genre 
+de millieue . Lui c'est occuper des calcule physique pour hypotétiser la réaction . Je me suis personnellent occuper 
+des capteur relier à une carte ardiuno et qui dois stocker les donné . 
+
+Après etre tomber sur des vidéo de devlopeur web je me suis dit que pouvais etre pas mal d'apprendre cette nouvelle techno 
+J'avais déjà fais quelle que site en cours mais sans jamais approfondire j'ai donc réapris html css  et appris java script
+j'etais impressioné par la puissance du css qui permet de faire pas mal de chose je suis loin de connaitre tout mais 
+je continue dans apprendre tout les jours . 
+
+Si je peux faire un stage dans votre entreprise je suis sûr d'en apprendre encore plus sur le devolement web et donc 
+peut etre envisager travailler dans le domaine ??? (Je n'est pas encore appris le backend je n'est que quellque base 
+en php ) 
+
